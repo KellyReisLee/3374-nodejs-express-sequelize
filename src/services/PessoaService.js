@@ -1,9 +1,34 @@
+
 const Services = require('./Services.js')
 
 class PessoaService extends Services {
   constructor() {
     super('Pessoa');
   }
+
+  async getStudentMatriculas(id) {
+    const student = await super.getSourceId(id);
+    console.log(student)
+
+    // 'getAulasMatriculadas' vai recuperar todas as instâncias de 'Matricula' associadas a uma instância de 'Pessoa.'
+    //Nesse caso a instância de pessoa que tem a 'id' recebida pelo 'getStudentMatriculas'.
+    const matriculasList = await student.getAulasMatriculadas();
+    return matriculasList;
+
+  }
+
+  // Método para contar todas as matrículas associadas a um estudante
+  async getCountMatriculas(id) {
+    // Obtém a instância de Pessoa com o ID fornecido
+    const student = await super.getSourceId(id);
+    console.log(student);
+
+    // Conta todas as instâncias de 'Matricula' associadas a uma instância de 'Pessoa'
+    const matriculasCount = await student.countAulasMatriculadas();
+    console.log(matriculasCount)
+    return matriculasCount;
+  }
+
 }
 
 module.exports = PessoaService;

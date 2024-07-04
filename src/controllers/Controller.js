@@ -21,6 +21,18 @@ class Controller {
 
   }
 
+  async getAllWhere(req, res) {
+    // Chama o método 'getAllSources' da camada de serviços
+    try {
+      // chama o método 'getAllSources' da instancia, executa e armazena in 'resgiters'.
+      const registers = await this.entidadeService.getAllSourcesWhere();
+      return res.status(200).json(registers)
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   // Get one with Id:
   async getDataId(req, res) {
     const { id } = req.params;
@@ -40,7 +52,7 @@ class Controller {
       const registers = await this.entidadeService.createSource(newDataBody);
 
       if (!registers) {
-        return res.status(400).json({ message: 'User already exists!' });
+        return res.status(400).json({ message: 'Data already exists!' });
       }
 
       res.status(200).json({

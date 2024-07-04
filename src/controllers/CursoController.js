@@ -1,15 +1,12 @@
-const Controller = require("./Controller");
-const CursoService = require('../services/CursoServices');
+const Controller = require('./Controller.js');
+const CursoServices = require('../services/CursoServices.js');
 
-
-const cursoServices = new CursoService();
+const cursoServices = new CursoServices();
 
 class CursoController extends Controller {
   constructor() {
-    super(cursoServices)
+    super(cursoServices);
   }
 }
 
-
-
-module.exports = CursoController
+module.exports = CursoController;

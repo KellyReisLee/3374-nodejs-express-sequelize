@@ -1,4 +1,4 @@
-const Services = require('./Services.js')
+const Services = require('./Services.js');
 
 class CursoServices extends Services {
   constructor() {
@@ -7,7 +7,6 @@ class CursoServices extends Services {
 }
 
 module.exports = CursoServices;
-
 
 // Explicação desse código: - Objetivo.
 // 1. Encapsular a lógica de negócios;

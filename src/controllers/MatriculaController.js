@@ -8,6 +8,8 @@ class MatriculaController extends Controller {
   constructor() {
     super(matriculaServices)
   }
+
+
 }
 
 

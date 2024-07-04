@@ -11,6 +11,7 @@ class Services {
     return dataSource[this.model].findAll();
   }
 
+
   async getSourceId(id) {
     try {
       return dataSource[this.model].findByPk(Number(id))
@@ -24,14 +25,7 @@ class Services {
     // 'findOrCreate()' retorna uma array com objeto do modelo achado ou criado e um ''boolean.
     //Se o 'boolean' for true => registro criado, Se o 'boolean' for false => registro já existia. 
     try {
-      const newData = await dataSource[this.model].findOrCreate({
-        where: { cpf: data.cpf },
-        defaults: data,
-      })
-      if (newData[1] === false) {
-        return false
-      }
-      return newData[0]
+      return dataSource[this.model].create(data);
     } catch (error) {
       console.log(error);
     }
