@@ -26,6 +26,7 @@ class PessoaController extends Controller {
     }
   }
 
+  // Retorna a quantidade de matrículas relacionadas a essa id.
   async getMatriculasCountById(req, res) {
     const { estudantId } = req.params;
     try {
@@ -35,6 +36,20 @@ class PessoaController extends Controller {
       console.log(error);
     }
   }
+
+
+  //Criar nova matrícula para usúário específico:
+  async addMatricula(req, res) {
+    const { estudantId } = req.params;
+    const data = req.body;
+    try {
+      const matriculaList = await pessoaServices.postMatriculaUser(Number(estudantId), data);
+      res.status(200).json(matriculaList)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
 
 

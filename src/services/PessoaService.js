@@ -21,13 +21,24 @@ class PessoaService extends Services {
   async getCountMatriculas(id) {
     // Obtém a instância de Pessoa com o ID fornecido
     const student = await super.getSourceId(id);
-    console.log(student);
+
 
     // Conta todas as instâncias de 'Matricula' associadas a uma instância de 'Pessoa'
     const matriculasCount = await student.countAulasMatriculadas();
     console.log(matriculasCount)
     return matriculasCount;
   }
+
+  async postMatriculaUser(id, data) {
+    // Obtém a instância de Pessoa com o ID fornecido
+    const student = await super.getSourceId(id);
+
+    // Conta todas as instâncias de 'Matricula' associadas a uma instância de 'Pessoa'
+    const matriculasCount = await student.addAulasMatriculadas(data);
+    console.log(matriculasCount)
+    return matriculasCount;
+  }
+
 
 }
 

@@ -19,7 +19,7 @@ router.delete('/pessoas/:id', (req, res) => pessoaController.deleteData(req, res
 
 router.get('/pessoas/:estudantId/matriculas', (req, res) => pessoaController.getMatriculas(req, res))
 router.get('/pessoas/:estudantId/count', (req, res) => pessoaController.getMatriculasCountById(req, res))
-router.post('/pessoas/:estudanteId/matriculas', (req, res) => matriculaController.createData(req, res))
+router.post('/pessoas/:estudantId/matriculas', (req, res) => matriculaController.createData(req, res))
 
 
 
