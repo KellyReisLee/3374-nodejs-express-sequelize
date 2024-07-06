@@ -16,7 +16,7 @@ class Controller {
       const registers = await this.entidadeService.getAllSources();
       return res.status(200).json(registers)
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ message: error.message })
     }
 
   }
@@ -28,7 +28,7 @@ class Controller {
       const registers = await this.entidadeService.getAllSourcesWhere();
       return res.status(200).json(registers)
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ message: error.message })
     }
 
   }
@@ -40,7 +40,7 @@ class Controller {
       const register = await this.entidadeService.getSourceId(id);
       res.status(200).json(register)
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ message: error.message })
     }
 
   }
@@ -60,7 +60,7 @@ class Controller {
         user: { ...registers.dataValues }
       });
     } catch (error) {
-      res.status(500).json({ message: 'Internal server error', error: error.message });
+      return res.status(500).json({ message: error.message })
     }
   }
 
@@ -79,7 +79,7 @@ class Controller {
       }
       res.status(200).json({ message: 'Updated Successfully!' })
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ message: error.message })
     }
   }
 
@@ -91,11 +91,11 @@ class Controller {
       const deleteData = await this.entidadeService.deleteSource(Number(id)
       )
       if (!deleteData) {
-        return res.status(404).json({ message: 'Could not find user!' });
+        return res.status(404).json({ message: 'Could not find!' });
       }
-      return res.status(200).json({ message: 'User deleted!' });
+      return res.status(200).json({ message: 'Deleted Successfully!' });
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ message: error.message })
     }
   }
 
