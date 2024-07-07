@@ -2,31 +2,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('matriculas', {
+    await queryInterface.createTable('cursos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      status: {
+      titulo: {
         type: Sequelize.STRING
       },
-      estudante_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        // 'model' é só o nome da propriedade - Aqui passamos o nome da tabela associada.
-        // 'key' passamos o nome da coluna que vai fazer a associação.
-        references: { model: 'pessoas', key: 'id' }
-
+      descricao: {
+        type: Sequelize.STRING
       },
-      curso_id: {
+      data_inicio: {
+        type: Sequelize.DATEONLY
+      },
+      docente_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        // 'model' é só o nome da propriedade - Aqui passamos o nome da tabela associada.
-        // 'key' passamos o nome da coluna que vai fazer a associação.
-        references: { model: 'cursos', key: 'id' }
-
+        references: { model: 'pessoas', key: 'id' }
+      },
+      categoria_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'categorias', key: 'id' }
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('matriculas');
+    await queryInterface.dropTable('cursos');
   }
 };

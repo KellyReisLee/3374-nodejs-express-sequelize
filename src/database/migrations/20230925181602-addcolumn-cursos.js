@@ -2,14 +2,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // Passe o nome da coluna, o nome da tabela e os tipos de dados da nova coluna.
-    await queryInterface.addColumn('pessoas', 'deleteAt', {
+    await queryInterface.addColumn('cursos', 'deletedAt', {
       allowNull: true,
       type: Sequelize.DATE
-
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('pessoas', 'deleteAt');
+    await queryInterface.removeColumn('cursos', 'deletedAt');
   }
 };
