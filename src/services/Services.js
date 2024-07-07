@@ -10,6 +10,10 @@ class Services {
     return dataSource[this.model].findAll();
   }
 
+  async getAllRegisterScope(scope) {
+    return dataSource[this.model].scope(scope).findAll();
+  }
+
 
   async getSourceId(id) {
     try {

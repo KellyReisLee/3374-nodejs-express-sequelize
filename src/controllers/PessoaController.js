@@ -22,8 +22,18 @@ class PessoaController extends Controller {
       const matriculaList = await pessoaServices.getStudentMatriculas(Number(estudantId));
       res.status(200).json(matriculaList)
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ erro: error.message })
     }
+  }
+
+  async getAllPessoasScope(req, res) {
+    try {
+      const listAdd = await pessoaServices.getAllScope();
+      res.status(200).json(listAdd)
+    } catch (error) {
+      return res.status(500).json({ erro: error.message })
+    }
+
   }
 
   // Retorna a quantidade de matrículas relacionadas a essa id.
@@ -33,7 +43,7 @@ class PessoaController extends Controller {
       const matriculaList = await pessoaServices.getCountMatriculas(Number(estudantId));
       res.status(200).json(matriculaList)
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ erro: error.message })
     }
   }
 
@@ -46,7 +56,7 @@ class PessoaController extends Controller {
       const matriculaList = await pessoaServices.postMatriculaUser(Number(estudantId), data);
       res.status(200).json(matriculaList)
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ erro: error.message })
     }
   }
 

@@ -17,6 +17,11 @@ class PessoaService extends Services {
 
   }
 
+  async getAllScope() {
+    const allPessoasList = await super.getAllRegisterScope('allRegisters');
+    return allPessoasList;
+  }
+
   // Método para contar todas as matrículas associadas a um estudante
   async getCountMatriculas(id) {
     // Obtém a instância de Pessoa com o ID fornecido
@@ -38,6 +43,8 @@ class PessoaService extends Services {
     console.log(matriculasCount)
     return matriculasCount;
   }
+
+
 
 
 }
