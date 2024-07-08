@@ -1,5 +1,5 @@
 
-
+const conversorIds = require('../utils/conversorDeStringHelper')
 // OBS: LEMBRE-SE:
 // Uma instância é um objeto concreto que é criado a partir de uma classe. Cada instância possui seus próprios dados e pode acessar os métodos definidos pela classe da qual foi criada.
 
@@ -45,6 +45,21 @@ class Controller {
 
   }
 
+
+  // Get one:
+  async getDataOne(req, res) {
+    const { ...params } = req.params;
+    const where = conversorIds(params)
+    console.log(where);
+    try {
+      const register = await this.entidadeService.getSourceOne(where)
+      res.status(200).json(register)
+    } catch (error) {
+      return res.status(500).json({ message: error.message })
+    }
+
+  }
+
   // Create
   async createData(req, res) {
     const newDataBody = req.body;
@@ -66,12 +81,12 @@ class Controller {
 
   // Update
   async updateData(req, res) {
-    const { id } = req.params;
+    const { ...params } = req.params;
     const newData = req.body;
-
+    const where = conversorIds(params)
     try {
       const newDataUpdated = await this.entidadeService.updateSource(
-        newData, Number(id)
+        newData, where
       )
 
       if (!newDataUpdated) {

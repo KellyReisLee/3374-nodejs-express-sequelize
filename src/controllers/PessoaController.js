@@ -16,10 +16,20 @@ class PessoaController extends Controller {
     super(pessoaServices)
   }
   // Posso criar métodos aqui também:
-  async getMatriculas(req, res) {
-    const { estudantId } = req.params;
+  async getMatriculasAtivas(req, res) {
+    const { estudante_id } = req.params;
     try {
-      const matriculaList = await pessoaServices.getStudentMatriculas(Number(estudantId));
+      const matriculaList = await pessoaServices.getStudentMatriculasAtivas(Number(estudante_id));
+      res.status(200).json(matriculaList)
+    } catch (error) {
+      return res.status(500).json({ erro: error.message })
+    }
+  }
+
+  async getAllMatriculas(req, res) {
+    const { estudante_id } = req.params;
+    try {
+      const matriculaList = await pessoaServices.getStudentMatriculasAll(Number(estudante_id));
       res.status(200).json(matriculaList)
     } catch (error) {
       return res.status(500).json({ erro: error.message })

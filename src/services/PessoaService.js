@@ -6,13 +6,25 @@ class PessoaService extends Services {
     super('Pessoa');
   }
 
-  async getStudentMatriculas(id) {
+  async getStudentMatriculasAtivas(id) {
     const student = await super.getSourceId(id);
     console.log(student)
 
     // 'getAulasMatriculadas' vai recuperar todas as instâncias de 'Matricula' associadas a uma instância de 'Pessoa.'
     //Nesse caso a instância de pessoa que tem a 'id' recebida pelo 'getStudentMatriculas'.
     const matriculasList = await student.getAulasMatriculadas();
+    return matriculasList;
+
+  }
+
+  //getStudentMatriculasAll
+
+
+  async getStudentMatriculasAll(id) {
+    const student = await super.getSourceId(id);
+    console.log(student)
+
+    const matriculasList = await student.getTodasAsMatriculas();
     return matriculasList;
 
   }
@@ -40,7 +52,6 @@ class PessoaService extends Services {
 
     // Conta todas as instâncias de 'Matricula' associadas a uma instância de 'Pessoa'
     const matriculasCount = await student.addAulasMatriculadas(data);
-    console.log(matriculasCount)
     return matriculasCount;
   }
 

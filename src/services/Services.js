@@ -24,6 +24,15 @@ class Services {
 
   }
 
+  async getSourceOne(where) {
+    try {
+      return dataSource[this.model].findOne({ where: { ...where } })
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   async createSource(data) {
     // 'findOrCreate()' retorna uma array com objeto do modelo achado ou criado e um ''boolean.
     //Se o 'boolean' for true => registro criado, Se o 'boolean' for false => registro já existia. 
@@ -35,10 +44,10 @@ class Services {
 
   }
 
-  async updateSource(newData, id) {
+  async updateSource(newData, where) {
     try {
       const updatedList = await dataSource[this.model].update(
-        newData, { where: { id } }
+        newData, { where: { ...where } }
       )
 
       if (updatedList[0] === 0) {
