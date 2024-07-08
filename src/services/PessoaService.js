@@ -19,7 +19,6 @@ class PessoaService extends Services {
 
   //getStudentMatriculasAll
 
-
   async getStudentMatriculasAll(id) {
     const student = await super.getSourceId(id);
     console.log(student)

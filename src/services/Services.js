@@ -1,3 +1,4 @@
+
 const dataSource = require('../database/models')
 
 class Services {
@@ -6,8 +7,11 @@ class Services {
   }
   // Trabalhe com métodos não estáticos pois eles vão manipular dados das instâcias.
 
-  async getAllSources() {
-    return dataSource[this.model].findAll();
+  async getAllSources(where = {}) {
+    return dataSource[this.model].findAll({
+      where: { ...where },
+
+    });
   }
 
   async getAllRegisterScope(scope) {
@@ -21,6 +25,11 @@ class Services {
     } catch (error) {
       console.log(error);
     }
+
+  }
+
+  async findAndCountMatriculas(options) {
+    return dataSource[this.model].findAndCountAll({ ...options });
 
   }
 
