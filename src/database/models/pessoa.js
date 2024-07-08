@@ -1,4 +1,5 @@
 'use strict';
+const isValid = require('../../utils/cpfHelper')
 const {
   Model
 } = require('sequelize');
@@ -23,17 +24,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Pessoa.init({
-    nome: DataTypes.STRING,
+    nome: {
+      type: DataTypes.STRING,
+      validate: {
+        isNotLen(value) {
+          if (value.length < 3) {
+            throw new Error('Must contain at least 3 characters.');
+          } else if (value.length > 15) {
+            throw new Error('Must contain less than 15 characters.');
+          }
+        }
+      }
+
+    },
     email: {
       type: DataTypes.STRING,
       validate: {
         isEmail: {
           args: true,
           msg: 'Email Invalid!'
+        },
+        isNotSpam(value) {
+          const spamWords = ['spam', 'junk', 'ads'];
+          if (spamWords.some(word => value.includes(word))) {
+            throw new Error('O e-mail não pode conter palavras de spam');
+          }
         }
       }
     },
-    cpf: DataTypes.STRING,
+    cpf: {
+      type: DataTypes.STRING,
+      validate: {
+        validCpf: (cpf) => {
+          if (!isValid(cpf)) {
+            throw new Error('CPF number invalid!')
+          }
+        }
+      }
+    },
     ativo: DataTypes.BOOLEAN,
     role: DataTypes.STRING
   }, {
