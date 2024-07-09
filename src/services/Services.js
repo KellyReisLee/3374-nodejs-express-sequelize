@@ -53,11 +53,16 @@ class Services {
 
   }
 
-  async updateSource(newData, where) {
+  async updateSource(newData, where, transacao = {}) {
     try {
-      const updatedList = await dataSource[this.model].update(
-        newData, { where: { ...where } }
-      )
+      const updatedList = await dataSource[this.model]
+        .update(
+          newData,
+          {
+            where: { ...where },
+            transaction: transacao
+          }
+        )
 
       if (updatedList[0] === 0) {
         return false

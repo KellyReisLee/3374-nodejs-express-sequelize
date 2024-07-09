@@ -1,9 +1,11 @@
+const dataSource = require('../database/models')
 
 const Services = require('./Services.js')
 
 class PessoaService extends Services {
   constructor() {
     super('Pessoa');
+    this.matriculaServices = new Services('Matricula')
   }
 
   async getStudentMatriculasAtivas(id) {
@@ -54,6 +56,20 @@ class PessoaService extends Services {
     return matriculasCount;
   }
 
+  async cancelPessoaMatriculas(estudante_id) {
+
+    return dataSource.sequelize.transaction(async (transacao) => {
+      // Atualize dados do estudante na tabela pessoas
+      await super.updateSource({ ativo: false }, { id: estudante_id }, transacao)
+      // Atualize dados do estudante na tabela pessoas
+
+      await this.matriculaServices.updateSource({ status: 'cancelado' }, { estudante_id }, transacao)
+
+      // Atualiza matrículas.
+    })
+
+
+  }
 
 
 

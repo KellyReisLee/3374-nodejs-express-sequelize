@@ -15,6 +15,7 @@ router.get('/pessoas/all', (req, res) => pessoaController.getAllPessoasScope(req
 router.get('/pessoas/:id', (req, res) => pessoaController.getDataId(req, res))
 router.post('/pessoas', (req, res) => pessoaController.createData(req, res))
 router.put('/pessoas/:id', (req, res) => pessoaController.updateData(req, res))
+router.put('/pessoas/:estudante_id/cancel', (req, res) => pessoaController.cancelRegisterPessoa(req, res))
 router.delete('/pessoas/:id', (req, res) => pessoaController.deleteData(req, res))
 
 // Apenas as matrículas - status: 'matriculado'.
@@ -30,7 +31,7 @@ router.get('/pessoas/:estudante_id/matriculas/all', (req, res) => pessoaControll
 //Pega a quantidade de matrículas confirmadas:
 router.get('/pessoas/:estudante_id/matriculas/confirmadas', (req, res) => matriculaController.getMatriculasCountById(req, res))
 
-//getFullCourses
+
 
 // Pega apenas uma matrícula:
 router.get('/pessoas/matriculas/full', (req, res) => matriculaController.getFullCourses(req, res))
@@ -38,12 +39,10 @@ router.get('/pessoas/matriculas/full', (req, res) => matriculaController.getFull
 // Pega apenas uma matrícula:
 router.get('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.getDataOne(req, res))
 
+router.put('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.cancelPessoaMatriculas(req, res))
 
 
-router.put('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.updateData(req, res))
 router.delete('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.deleteData(req, res))
-
-
 
 
 module.exports = router;

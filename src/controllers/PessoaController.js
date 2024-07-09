@@ -55,11 +55,8 @@ class PessoaController extends Controller {
     } catch (error) {
       return res.status(500).json({ erro: error.message })
     }
+
   }
-
-
-
-
 
   //Criar nova matrícula para usúário específico:
   async addMatricula(req, res) {
@@ -73,7 +70,16 @@ class PessoaController extends Controller {
     }
   }
 
-
+  // Cancelar o registro de uma pessoa se ela for deletada.
+  async cancelRegisterPessoa(req, res) {
+    const { estudante_id } = req.params;
+    try {
+      await pessoaServices.cancelPessoaMatriculas(Number(estudante_id))
+      return res.status(200).json({ message: `matrículas ref.estudante ${estudante_id} canceladas.` })
+    } catch (error) {
+      return res.status(500).json({ erro: error.message })
+    }
+  }
 
 
 
